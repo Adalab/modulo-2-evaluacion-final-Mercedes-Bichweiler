@@ -39,11 +39,19 @@ function renderProducts(productsData) {
       <img src="${imageUrl}"/>
       <p>${product.title}</p>
       <p>${product.price}€</p>
-      <button class="js_buyBtn" id="${product.id}">Comprar</button>
-    </div> `;
-
-    listProducts.innerHTML = html;
+      <button 
+       id="${product.id}" 
+       class="js_buyBtn product-btn ${
+         cart.some((item) => item.id === product.id)
+           ? "product-btn--selected"
+           : ""
+       }">
+       ${cart.some((item) => item.id === product.id) ? "Eliminar" : "Comprar"}
+      </button>
+    </div>`;
   }
+  listProducts.innerHTML = html;
+
   // despues de pintar los productos, activo botones
   addBuyButtonEvents();
 }
@@ -63,17 +71,19 @@ function handleAddCart(ev) {
   const productId = parseInt(ev.currentTarget.id);
   const selectedProduct = productsData.find((item) => item.id === productId);
 
-  // verificar si el producto esta en el carro
+  // verificar si el producto ya está en el carrito
   const alreadyInCart = cart.some((item) => item.id === productId);
 
-  if (!alreadyInCart) {
-    cart.push(selectedProduct);
-    console.log("producto añadido", selectedProduct);
+  if (alreadyInCart) {
+    // si ya está → eliminarlo del carrito
+    cart = cart.filter((item) => item.id !== productId);
   } else {
-    console.log("ya esta en el carro");
+    // si no está → agregarlo
+    cart.push(selectedProduct);
   }
 
-  renderCart();
+  renderProducts(productsData); // repinta los botones con el estado actualizado
+  renderCart(); // muestra el carrito actualizado
 }
 
 // funcion para mostrar el carro

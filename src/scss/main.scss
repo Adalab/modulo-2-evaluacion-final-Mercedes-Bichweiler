@@ -28,3 +28,25 @@
   padding: 2rem;
   box-shadow: rgba(159, 187, 135, 0.5) 0px 6px 20px;
 }
+.cart-item{
+  list-style: none;
+}
+.product-btn {
+  background-color: rgba(159, 187, 135, 0.5);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product-btn:hover {
+  background-color: rgba(169, 227, 135, 0.5);
+}
+
+.product-btn--selected {
+  background-color: white;
+  color:rgba(159, 187, 135, 0.5);
+  border: 2px solid rgba(159, 187, 135, 0.5);
+}
