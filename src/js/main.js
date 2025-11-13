@@ -11,19 +11,29 @@ const apiUrlTwo =
 let productsData = [];
 let cart = [];
 
+//carga carrito desde localStorage
+const savedCart = localStorage.getItem("cart");
+
+if (savedCart) {
+  cart = JSON.parse(savedCart);
+  renderCart();
+}
+
 //traer productos
 fetch(apiUrlOne)
   .then((res) => res.json())
   .then((data) => {
     productsData = data;
     renderProducts(productsData);
+    renderCart();
   })
   .catch(() => {
-    fetch(apiUrlTwo)
+    fetch(apiUrlTwo) // opcion dos api
       .then((res) => res.json())
       .then((data) => {
         productsData = data;
         renderProducts(productsData);
+        renderCart();
       });
   });
 
@@ -66,22 +76,21 @@ function addBuyButtonEvents() {
 }
 
 //funcion para agregar productos al carro
-
 function handleAddCart(ev) {
   const productId = parseInt(ev.currentTarget.id);
   const selectedProduct = productsData.find((item) => item.id === productId);
 
-  // verificar si el producto ya está en el carrito
+  // verifica si el producto ya está en el carrito
   const alreadyInCart = cart.some((item) => item.id === productId);
 
   if (alreadyInCart) {
-    // si ya está → eliminarlo del carrito
+    // si ya está lo elimina del carrito
     cart = cart.filter((item) => item.id !== productId);
   } else {
-    // si no está → agregarlo
+    // si no está lo agrega
     cart.push(selectedProduct);
   }
-
+  saveCart(); // guardamos en localstorage
   renderProducts(productsData); // repinta los botones con el estado actualizado
   renderCart(); // muestra el carrito actualizado
 }
@@ -99,6 +108,11 @@ function renderCart() {
       </li>
     `;
   }
+}
+
+//llamo function para guardar carrito en localStorage
+function saveCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 //funcion filtrar
