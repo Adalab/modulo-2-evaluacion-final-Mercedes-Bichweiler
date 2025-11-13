@@ -8,12 +8,15 @@
   font-family: 'Roboto', sans-serif;
   
   --color-text: #3f3f3f;
+  --color-secundary: rgba(159, 187, 135, 0.5);
 }
 .header{
-  width: 100%;
+  width: 100vw;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   margin: 2rem auto 5rem auto;
+  color: var(--color-text);
 }
 .header-title{
   font-size: 3rem;
@@ -46,7 +49,7 @@
 }
 .form-submit{
   color: var(--color-text);
-  background-color: rgba(159, 187, 135, 0.5);
+  background-color: var(--color-secundary);
   padding: 8px 12px;
   border-radius: 4px;
 }
@@ -59,6 +62,10 @@
   width: 100%;
   max-width: 300px;
   margin-bottom: 30px;
+}
+.cart-title{
+  font-size: 2rem;
+  padding: 2rem;
 }
 .cart-item{
   list-style: none;
@@ -73,7 +80,7 @@
 
 }
 .product-btn {
-  background-color: rgba(159, 187, 135, 0.5);
+  background-color: var(--color-secundary);
   color: white;
   border: none;
   padding: 8px 12px;
@@ -89,5 +96,13 @@
 .product-btn--selected {
   background-color: white;
   color:rgba(159, 187, 135, 0.5);
-  border: 2px solid rgba(159, 187, 135, 0.5);
+  border: 2px solid var(--color-secundary);
+}
+.footer{
+  background-color: var(--color-secundary);
+  color: var(--color-text);
+  width: 100vw;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
 }
