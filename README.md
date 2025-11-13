@@ -12,7 +12,7 @@ Esta aplicación permite:
 El proyecto está publicado en GitHub Pages, por lo que no es necesario abrir archivos localmente:
 
 - Accede a la URL de GitHub Pages del proyecto:
-  https://
+  https: http://beta.adalab.es/modulo-2-evaluacion-final-Mercedes-Bichweiler/
 - Usa el formulario de búsqueda para encontrar productos.
 - Haz clic en Comprar para añadir productos al carrito.
 - El carrito se actualizará y mostrará los productos añadidos
