@@ -3,7 +3,7 @@
 const searchInput = document.querySelector(".js_inputSearch");
 const searchSubmit = document.querySelector(".js_submitSearch");
 const listProducts = document.querySelector(".js_listProducts");
-const listCard = document.querySelector(".js_cardList");
+const listCart = document.querySelector(".js_cartList");
 const apiUrlOne = "https://fakestoreapi.com/products";
 const apiUrlTwo =
   "https://raw.githubusercontent.com/Adalab/resources/master/apis/products.json";
@@ -39,10 +39,55 @@ function renderProducts(productsData) {
       <img src="${imageUrl}"/>
       <p>${product.title}</p>
       <p>${product.price}€</p>
-      <button id="${product.id}">Comprar</button>
+      <button class="js_buyBtn" id="${product.id}">Comprar</button>
     </div> `;
 
     listProducts.innerHTML = html;
+  }
+  // despues de pintar los productos, activo botones
+  addBuyButtonEvents();
+}
+
+//funcion para escuchar botones
+function addBuyButtonEvents() {
+  const buyBtn = document.querySelectorAll(".js_buyBtn");
+
+  buyBtn.forEach((button) => {
+    button.addEventListener("click", handleAddCart);
+  });
+}
+
+//funcion para agregar productos al carro
+
+function handleAddCart(ev) {
+  const productId = parseInt(ev.currentTarget.id);
+  const selectedProduct = productsData.find((item) => item.id === productId);
+
+  // verificar si el producto esta en el carro
+  const alreadyInCart = cart.some((item) => item.id === productId);
+
+  if (!alreadyInCart) {
+    cart.push(selectedProduct);
+    console.log("producto añadido", selectedProduct);
+  } else {
+    console.log("ya esta en el carro");
+  }
+
+  renderCart();
+}
+
+// funcion para mostrar el carro
+function renderCart() {
+  listCart.innerHTML = "";
+
+  for (let item of cart) {
+    const imageUrl = item.image || "https://placehold.co/50x50";
+    listCart.innerHTML += `
+      <li class="cart-item">
+        <img src="${imageUrl}" alt="${item.title}" width="50" />
+        <span>${item.title} - ${item.price}€</span>
+      </li>
+    `;
   }
 }
 
